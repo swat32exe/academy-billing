@@ -2,13 +2,15 @@
 #include"Subscriber.h"
 #include<vector>
 
-//interface for any kind of subscriber storage
-class SubscriberStorage
+namespace AcademyBilling
 {
-public:
-    virtual ~SubscriberStorage(void);
-    virtual void addSubscriber(const Subscriber &subscriber);
-    virtual void getAllSubscribers(std::vector<Subscriber> &subscriber);
-    virtual Subscriber* findSubscriber(std::string number);
-};
-
+    //interface for any kind of subscriber storage
+    class SubscriberStorage
+    {
+    public:
+        virtual ~SubscriberStorage(void);
+        virtual void addSubscriber(const Subscriber &subscriber);
+        virtual void getAllSubscribers(std::vector<Subscriber> &subscriber);
+        virtual Subscriber* findSubscriber(std::string number);
+    };
+}

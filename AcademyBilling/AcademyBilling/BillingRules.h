@@ -2,12 +2,14 @@
 #include "Subscriber.h"
 #include "Call.h"
 
-class BillingRules
+namespace AcademyBilling
 {
-public:
-    BillingRules(void);
-    virtual ~BillingRules(void);
-    //updates subscriber according to call, returns amount of money charged
-    virtual int chargeForCall(Subscriber &subscriber, const Call &call) const =0;
-};
-
+    class BillingRules
+    {
+    public:
+        BillingRules(void);
+        virtual ~BillingRules(void);
+        //updates subscriber according to call, returns amount of money charged
+        virtual int chargeForCall(Subscriber &subscriber, const Call &call) const =0;
+    };
+}

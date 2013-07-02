@@ -1,9 +1,9 @@
 #include "BillingRules.h"
 
-BillingRules::BillingRules(void)
+AcademyBilling::BillingRules::BillingRules(void)
 {
 }
 
-BillingRules::~BillingRules(void)
+AcademyBilling::BillingRules::~BillingRules(void)
 {
 }
