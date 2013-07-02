@@ -1,15 +1,20 @@
 #pragma once
 #include "Subscriber.h"
 #include "Call.h"
+#include "SubscriberStorage.h"
 #include<vector>
 
 class BillingCalculator
 {
+private:
+    std::shared_ptr<SubscriberStorage> subscriberStorage;
 public:
     BillingCalculator(void);
     ~BillingCalculator(void);
-
-    //Updates subscribers, according to calls
-    void calculateBills(std::vector<Subscriber> & subscribers, const std::vector<Call> &calls) const;
+    void setSubscrberStorage(std::shared_ptr<SubscriberStorage> subscriberStorage) const;
+    //warning:call must be made after any other call, that has been already processed
+    void chargeForSingleCall(const Call& call);
+    //warning:all calls must be made after any other call, that has been already processed
+    void chargeForMultipleCalls(std::vector<Call>& call);
 };
 

@@ -1,15 +1,21 @@
 #include "BillingCalculator.h"
 
-
 BillingCalculator::BillingCalculator(void)
 {
 }
-
 
 BillingCalculator::~BillingCalculator(void)
 {
 }
 
-void BillingCalculator::calculateBills(std::vector<Subscriber> & subscribers, const std::vector<Call> &calls) const
+void BillingCalculator::setSubscrberStorage(std::shared_ptr<SubscriberStorage> subscriberStorage) const
+{
+}
+
+void BillingCalculator::chargeForSingleCall(const Call& call)
+{
+}
+
+void BillingCalculator::chargeForMultipleCalls(std::vector<Call>& call)
 {
 }

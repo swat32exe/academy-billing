@@ -1,10 +1,8 @@
 #include "DefaultBillingRules.h"
 
-
 DefaultBillingRules::DefaultBillingRules(void)
 {
 }
-
 
 DefaultBillingRules::~DefaultBillingRules(void)
 {

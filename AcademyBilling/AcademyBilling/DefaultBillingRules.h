@@ -1,5 +1,6 @@
 #pragma once
 #include "billingrules.h"
+
 class DefaultBillingRules :
     public BillingRules
 {

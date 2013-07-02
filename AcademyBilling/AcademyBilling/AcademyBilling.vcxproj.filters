@@ -24,6 +24,9 @@
     <ClInclude Include="DefaultBillingRules.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SubscriberStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BillingCalculator.cpp">
