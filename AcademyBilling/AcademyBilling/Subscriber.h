@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "Refill.h"
 #include "Call.h"
 #include "BillingRules.h"
@@ -10,9 +11,9 @@ namespace AcademyBilling
 	{
 	private: 
 		int balance;
-		int number;
+		std::string number;
 		BillingRules* tariff;
-		Refill refills[];
+		std::vector<Refill> refills;
 	public:
 		Subscriber(const std::string&);
 		~Subscriber();
