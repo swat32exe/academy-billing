@@ -8,12 +8,12 @@ namespace AcademyBilling
 	private:	
 		int money;
 		time_t time;
-	public:	Refill(void);
-			Refill(int,time_t);
-			~Refill(void);
-			int getMoney() const;
-			void setMoney(const int&);
-			time_t getTime() const;
-			void setTime(const time_t&);
+	public:	
+		Refill(int,time_t);
+		~Refill(void);
+		int getMoney() const;
+		void setMoney(const int&);
+		time_t getTime() const;
+		void setTime(const time_t&);
 	};
 }
