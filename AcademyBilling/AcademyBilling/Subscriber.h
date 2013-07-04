@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SUBSCRIBER_H
+#define _SUBSCRIBER_H
+
 #include <string>
 #include <vector>
 #include "Refill.h"
@@ -25,3 +27,5 @@ namespace AcademyBilling
 		int addRefill(const Refill&);
 	};
 }
+
+#endif

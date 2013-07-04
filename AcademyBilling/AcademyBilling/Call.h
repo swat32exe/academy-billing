@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _CALL_H
+#define _CALL_H
+
 #include <string>
 #include <time.h>
 
@@ -24,3 +26,5 @@ namespace AcademyBilling
 		void setDuration(const unsigned int&);
 	};
 }
+
+#endif

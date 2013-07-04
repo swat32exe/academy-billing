@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _REFILL_H
+#define _REFILL_H
+
 #include <time.h>
 
 namespace AcademyBilling
@@ -17,3 +19,5 @@ namespace AcademyBilling
 		void setTime(const time_t&);
 	};
 }
+
+#endif
