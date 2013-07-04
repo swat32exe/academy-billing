@@ -2,9 +2,6 @@
 
 namespace AcademyBilling
 {
-	Refill::Refill(void)
-	{
-	}
 
 	Refill::~Refill(void)
 	{

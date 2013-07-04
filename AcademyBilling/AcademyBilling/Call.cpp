@@ -2,7 +2,7 @@
 
 namespace AcademyBilling
 {
-	Call::Call(void)
+	Call::Call(const std::string& From,const std::string& To,const time_t& Time,const unsigned int& Duration)
 	{
 	}
 
@@ -10,14 +10,14 @@ namespace AcademyBilling
 	{
 	}
 
-	std::string Call::getFrom() const
+	std::string Call::getCallerNumber() const
 	{
-		return "+38(050)123-45-67";
+		return "+38(050)1234567";
 	}
 
-	std::string Call::getTo() const
+	std::string Call::getCalleeNumber() const
 	{
-		return "+38(050)123-45-68";
+		return "+38(050)1234568";
 	}
 
 	time_t Call::getTime() const

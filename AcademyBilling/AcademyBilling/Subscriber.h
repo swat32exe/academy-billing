@@ -12,15 +12,16 @@ namespace AcademyBilling
 	private: 
 		int balance;
 		std::string number;
-		BillingRules* tariff;
+		BillingRules *tariff;
 		std::vector<Refill> refills;
 	public:
 		Subscriber(const std::string&);
+		Subscriber(const Subscriber&);
 		~Subscriber();
 		int getBalance() const;
 		std::string getNumber() const;
 		void setNumber(const std::string&);
-		int charge(const Call&);
+		int charge(const int&);
 		int addRefill(const Refill&);
 	};
 }

@@ -17,10 +17,10 @@ namespace AcademyBilling
 
 	std::string Subscriber::getNumber() const
 	{
-		return "+38(050)123-45-67";
+		return "+38(050)1234567";
 	}
 
-	int Subscriber::charge(const Call& call)
+	int Subscriber::charge(const int&)
 	{
 		return 1;
 	}
