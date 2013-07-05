@@ -1,7 +1,8 @@
 #pragma once
+#include <memory>
+
 #include "BillingRules.h"
 #include "DefaultBillingRuleBlocks.h"
-#include <memory>
 
 namespace AcademyBilling
 {

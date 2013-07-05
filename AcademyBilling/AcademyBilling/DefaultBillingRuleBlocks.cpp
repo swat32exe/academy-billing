@@ -1,8 +1,10 @@
 #include "DefaultBillingRuleBlocks.h"
-#include "Utility.h"
+
 #include <regex>
 #include <vector>
 #include <string>
+
+#include "Utility.h"
 
 namespace AcademyBilling
 {
@@ -38,7 +40,7 @@ namespace AcademyBilling
     {
         bool isWeekend = Utility::isWeekend(callInfo.callTime);
 
-        if(isWeekend) {
+        if (isWeekend) {
             if (callInfo.callDuration <= Utility::secondsInMinute * minutesAmount)
                 return 0;
 
@@ -56,8 +58,7 @@ namespace AcademyBilling
     int DefaultBillingRuleBlockFreeMinutesAfterCredit::calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const
     {
         // If minutes still valid.
-        if((callInfo.callTime - callInfo.lastRefillTime) > minutesValidTime)
-        {
+        if ((callInfo.callTime - callInfo.lastRefillTime) > minutesValidTime) {
             if (callInfo.callDuration <= callInfo.freeMinutesSinceLastCredit * Utility::secondsInMinute) {
                 // If call length was 1:01 take 2 minutes anyway.
                 callInfo.freeMinutesSinceLastCredit -= Utility::secondsToMinutesWithCeiling(callInfo.callDuration);
@@ -80,7 +81,7 @@ namespace AcademyBilling
     int DefaultBillingRuleBlockNetworkTypeSplitter::calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const
     {
         // Number should be in format +xx(xxx)xxxxxxx.
-        for(auto i = insidePrefixes.begin(); i!= insidePrefixes.end(); ++i){
+        for(auto i = insidePrefixes.begin(); i!= insidePrefixes.end(); ++i) {
             std::string expression = ".*(";
             expression += *i;
             expression += ").*";
