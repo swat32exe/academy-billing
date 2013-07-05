@@ -1,4 +1,5 @@
 #include "DefaultBillingRuleBlocks.h"
+#include "Utility.h"
 #include <regex>
 #include <vector>
 #include <string>
@@ -36,17 +37,13 @@ namespace AcademyBilling
 
     int DefaultBillingRuleBlockWeekendFreeMinutes::calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const
     {
-        tm timeInfo;
-        localtime_s(&timeInfo, &callInfo.callTime);
-        int weekDay=timeInfo.tm_wday;
-        bool itIsWeekend = (weekDay == 0) || (weekDay == 6);
+        bool isWeekend = Utility::isWeekend(callInfo.callTime);
 
-        if(itIsWeekend)
-        {
-            if (callInfo.callDuration <= 60*minutesAmount)
+        if(isWeekend) {
+            if (callInfo.callDuration <= Utility::secondsInMinute * minutesAmount)
                 return 0;
 
-            callInfo.callDuration -= 60*minutesAmount;
+            callInfo.callDuration -= Utility::secondsInMinute * minutesAmount;
         }
         return next->calculateCallCost(callInfo);
     }
@@ -63,13 +60,13 @@ namespace AcademyBilling
         // If minutes still valid.
         if((callInfo.callTime - callInfo.lastRefillTime) > minutesValidTime)
         {
-            if (callInfo.callDuration <= callInfo.freeMinutesSinceLastCredit * 60) {
+            if (callInfo.callDuration <= callInfo.freeMinutesSinceLastCredit * Utility::secondsInMinute) {
                 // If call length was 1:01 take 2 minutes anyway.
-                callInfo.freeMinutesSinceLastCredit -= (callInfo.callDuration + 59) / 60;
+                callInfo.freeMinutesSinceLastCredit -= Utility::secondsToMinutesWithCeiling(callInfo.callDuration);
                 return 0;
             }
         
-            callInfo.callDuration -= callInfo.freeMinutesSinceLastCredit * 60;
+            callInfo.callDuration -= callInfo.freeMinutesSinceLastCredit * Utility::secondsInMinute;
             callInfo.freeMinutesSinceLastCredit = 0;
         }
         return next->calculateCallCost(callInfo);
@@ -104,7 +101,7 @@ namespace AcademyBilling
 
     int DefaultBillingRuleBlockChargeFixedMinuteFee::calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const
     {
-        int callDurationInMinutes = (callInfo.callDuration + 59)/60;
+        int callDurationInMinutes = Utility::secondsToMinutesWithCeiling(callInfo.callDuration);
         return callDurationInMinutes * fee + next->calculateCallCost(callInfo);
     }
 

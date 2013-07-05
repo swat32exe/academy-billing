@@ -19,6 +19,7 @@
     <ClInclude Include="Refill.h" />
     <ClInclude Include="Subscriber.h" />
     <ClInclude Include="SubscriberStorage.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BillingCalculator.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="DefaultBillingRuleBlocks.cpp" />
     <ClCompile Include="Refill.cpp" />
     <ClCompile Include="Subscriber.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CE53BDDF-BD69-459F-84ED-D25617EAB0CF}</ProjectGuid>

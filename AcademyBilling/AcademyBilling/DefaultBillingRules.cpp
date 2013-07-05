@@ -1,5 +1,6 @@
 #include "DefaultBillingRules.h"
 #include "Subscriber.h"
+#include "Utility.h"
 
 namespace AcademyBilling
 {
@@ -50,7 +51,7 @@ namespace AcademyBilling
         // Charge fixed fee 0.50 and stop processing.
         std::auto_ptr<DefaultBillingRuleBlock> fixedMinuteFeeInsideNetwork(new DefaultBillingRuleBlockChargeFixedMinuteFee(50, stop));
         // Use free minutes, that were provided after last refill. If not enough go to fixedMinuteFeeInsideNetwork rule.
-        std::auto_ptr<DefaultBillingRuleBlock> freeMinutesAfterCredit(new DefaultBillingRuleBlockFreeMinutesAfterCredit(30*24*60*60, fixedMinuteFeeInsideNetwork));
+        std::auto_ptr<DefaultBillingRuleBlock> freeMinutesAfterCredit(new DefaultBillingRuleBlockFreeMinutesAfterCredit(30 * Utility::secondsInDay, fixedMinuteFeeInsideNetwork));
         // Use 5 free minutes, if it's weekend.
         std::auto_ptr<DefaultBillingRuleBlock> weekendFreeMinutes(new DefaultBillingRuleBlockWeekendFreeMinutes(5,freeMinutesAfterCredit));
 
