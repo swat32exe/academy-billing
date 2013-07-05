@@ -27,7 +27,6 @@ namespace AcademyBilling
         return fee + next->calculateCallCost(callInfo);
     }
 
-
     DefaultBillingRuleBlockWeekendFreeMinutes::DefaultBillingRuleBlockWeekendFreeMinutes(const int minutesAmount, std::auto_ptr<DefaultBillingRuleBlock> &next) :
         minutesAmount(minutesAmount)
         ,next(next)
@@ -50,7 +49,6 @@ namespace AcademyBilling
         }
         return next->calculateCallCost(callInfo);
     }
-
 
     DefaultBillingRuleBlockFreeMinutesAfterCredit::DefaultBillingRuleBlockFreeMinutesAfterCredit(int minutesValidTime, std::auto_ptr<DefaultBillingRuleBlock> &next) :
         minutesValidTime(minutesValidTime)
