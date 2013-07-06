@@ -1,9 +1,17 @@
 #include "Subscriber.h"
+#include <stdexcept>
+#include <ctype.h>
 
 namespace AcademyBilling
 {
-	Subscriber::Subscriber(const std::string& s)
+	const std::string Subscriber::mask="+3(***)*******";
+
+	Subscriber::Subscriber(const std::string& _number, const int& _balance, BillingRules* _tariff, const Refill _lastRefill)
+		:lastRefill(_lastRefill)
 	{
+		setNumber(_number);
+		balance=_balance;
+		tariff=_tariff;
 	}
 
 	Subscriber::~Subscriber(void)
@@ -12,21 +20,49 @@ namespace AcademyBilling
 
 	int Subscriber::getBalance() const
 	{
-		return 1;
+		return balance;
 	}
 
 	std::string Subscriber::getNumber() const
 	{
-		return "+38(050)1234567";
+		return number;
+	}
+	void Subscriber::setNumber(const std::string& str)
+	{
+		if(isNumberValid(str))
+		{
+			number=str;
+		}
+		else
+		{
+			throw std::invalid_argument("Invalid number");			
+		}
 	}
 
-	int Subscriber::charge(const int&)
+	int Subscriber::charge(const int& sum)
 	{
-		return 1;
+		return balance-=sum;
 	}
 
 	int Subscriber::addRefill(const Refill& refill)
 	{
-		return 1;
+		lastRefill=refill;
+		return balance+=refill.getMoney();
+	}
+
+	bool Subscriber::isNumberValid(const std::string& str)
+	{
+		if (str.length()!=mask.length())
+		{
+			return false;
+		}
+		for (size_t i=0;i<mask.length();++i)
+		{
+			if (!(mask[i]=='*' && isdigit(str[i]) || mask[i]!='*' && mask[i]==str[i]))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 }

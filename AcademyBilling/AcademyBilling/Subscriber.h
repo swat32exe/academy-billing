@@ -15,9 +15,10 @@ namespace AcademyBilling
 		int balance;
 		std::string number;
 		BillingRules *tariff;
-		std::vector<Refill> refills;
+		Refill lastRefill;
+		const static std::string mask;
 	public:
-		Subscriber(const std::string&);
+		Subscriber(const std::string&, const int&, BillingRules*, const Refill);
 		Subscriber(const Subscriber&);
 		~Subscriber();
 		int getBalance() const;
@@ -25,6 +26,7 @@ namespace AcademyBilling
 		void setNumber(const std::string&);
 		int charge(const int&);
 		int addRefill(const Refill&);
+		static bool isNumberValid(const std::string&);
 	};
 }
 
