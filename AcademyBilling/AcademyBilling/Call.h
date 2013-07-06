@@ -14,7 +14,7 @@ namespace AcademyBilling
 		time_t time;
 		unsigned int duration;
 	public:
-		Call(const std::string& From,const std::string& To,const time_t& Time,const unsigned int& Duration);
+		Call(const std::string&, const std::string&, const time_t& Time, const unsigned int& Duration);
 		~Call(void);
 		std::string getCallerNumber() const;
 		void setCallerNumber(const std::string&);
