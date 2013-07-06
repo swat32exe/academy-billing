@@ -1,13 +1,15 @@
 #pragma once
-#include "BillingRules.h"
 #include <vector>
 #include <string>
+
+#include "BillingRules.h"
 
 namespace AcademyBilling
 {
     class DefaultBillingRules;
 
-    /** Structure storing all information, necessary for ruleBlocks to process call.
+    /** 
+    *   Structure storing all information, necessary for ruleBlocks to process call.
     *   Might be modified during processing
     */
     struct DefaultBillingRuleBlockCallInfo
@@ -23,7 +25,8 @@ namespace AcademyBilling
 
     class DefaultBillingRules;
     
-    /** Rule block interface. 
+    /** 
+    *   Rule block interface. 
     *   Each block may do some partial call cost calculation and then invoke next block.
     */
     class DefaultBillingRuleBlock
