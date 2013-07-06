@@ -3,26 +3,10 @@
 #include <string>
 
 #include "BillingRules.h"
+#include "Utility.h"
 
 namespace AcademyBilling
 {
-    class DefaultBillingRules;
-
-    /** 
-    *   Structure storing all information, necessary for ruleBlocks to process call.
-    *   Might be modified during processing
-    */
-    struct DefaultBillingRuleBlockCallInfo
-    {
-        int callDuration;
-        time_t callTime;
-        time_t lastRefillTime;
-        int &freeMinutesSinceLastCredit;
-        std::string number;
-
-        DefaultBillingRuleBlockCallInfo(int callDuration, time_t callTime, time_t lastRefillTime, int &freeMinutesSinceLastCredit, std::string number);
-    };
-
     class DefaultBillingRules;
     
     /** 
@@ -31,65 +15,47 @@ namespace AcademyBilling
     */
     class DefaultBillingRuleBlock
     {
+        std::auto_ptr<DefaultBillingRuleBlock> next;
     public:
-        virtual int calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const =0;
+        int invokeNext(Call &call, Subscriber &subscriber) const;
+        DefaultBillingRuleBlock(DefaultBillingRuleBlock* next);
+        virtual int chargeForCall(Call &call, Subscriber &subscriber) const =0;
     };
 
     class DefaultBillingRuleBlockConnectionFee :
         public DefaultBillingRuleBlock
     {
-        int fee;
-        std::auto_ptr<DefaultBillingRuleBlock> next;
+        static const int fee = 33;
     public:
-        DefaultBillingRuleBlockConnectionFee(const int fee, std::auto_ptr<DefaultBillingRuleBlock> &next);
-        int calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const;
+        DefaultBillingRuleBlockConnectionFee(DefaultBillingRuleBlock* next);
+        int chargeForCall(Call &call, Subscriber &subscriber) const;
     };
 
     class DefaultBillingRuleBlockWeekendFreeMinutes :
         public DefaultBillingRuleBlock
     {
-        int minutesAmount;
-        std::auto_ptr<DefaultBillingRuleBlock> next;
+        static const int minutesAmount = 5;
     public:
-        DefaultBillingRuleBlockWeekendFreeMinutes(const int minutesAmount, std::auto_ptr<DefaultBillingRuleBlock> &next);
-        int calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const;
+        DefaultBillingRuleBlockWeekendFreeMinutes(DefaultBillingRuleBlock* next);
+        int chargeForCall(Call &call, Subscriber &subscriber) const;
     };
 
     class DefaultBillingRuleBlockFreeMinutesAfterCredit :
         public DefaultBillingRuleBlock
     {
-        std::auto_ptr<DefaultBillingRuleBlock> next;
-        int minutesValidTime;
+        static const int minutesValidTime = 30 * Utility::secondsInDay;
     public:
-        DefaultBillingRuleBlockFreeMinutesAfterCredit(int minutesValidTime, std::auto_ptr<DefaultBillingRuleBlock> &next);
-        int calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const;
-    };
-
-    class DefaultBillingRuleBlockNetworkTypeSplitter :
-        public DefaultBillingRuleBlock
-    {
-        std::auto_ptr<DefaultBillingRuleBlock> nextInside;
-        std::auto_ptr<DefaultBillingRuleBlock> nextOutside;
-        std::vector<std::string> insidePrefixes;
-    public:
-        DefaultBillingRuleBlockNetworkTypeSplitter(const std::vector<std::string> &insidePrefixes, std::auto_ptr<DefaultBillingRuleBlock> &nextInside, std::auto_ptr<DefaultBillingRuleBlock> &nextOutside);
-        int calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const;
+        DefaultBillingRuleBlockFreeMinutesAfterCredit(DefaultBillingRuleBlock* next);
+        int chargeForCall(Call &call, Subscriber &subscriber) const;
     };
 
     class DefaultBillingRuleBlockChargeFixedMinuteFee :
         public DefaultBillingRuleBlock
     {
-        int fee;
-        std::auto_ptr<DefaultBillingRuleBlock> next;
+        static const int feeInside = 50;
+        static const int feeOutside = 95;
     public:
-        DefaultBillingRuleBlockChargeFixedMinuteFee(int fee, std::auto_ptr<DefaultBillingRuleBlock> &next);
-        int calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const;
-    };
-
-    class DefaultBillingRuleBlockStop :
-        public DefaultBillingRuleBlock
-    {
-    public:
-        int calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo) const;
+        DefaultBillingRuleBlockChargeFixedMinuteFee(DefaultBillingRuleBlock* next);
+        int chargeForCall(Call &call, Subscriber &subscriber) const;
     };
 }

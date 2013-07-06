@@ -11,6 +11,7 @@ namespace AcademyBilling
     class DefaultBillingRules :
         public BillingRules
     {
+        friend DefaultBillingRuleBlockFreeMinutesAfterCredit;
         int freeMinutesSinceLastCredit;
         time_t lastCreditTime;
         static DefaultBillingRulesRuleset defaultBillingRulesRuleset;
@@ -18,14 +19,14 @@ namespace AcademyBilling
     public:
         DefaultBillingRules(void);
         ~DefaultBillingRules(void);
-        int chargeForCall(Subscriber &subscriber, const Call &call);
+        int chargeForCall(const Call &call, Subscriber &subscriber);
     };
 
     class DefaultBillingRulesRuleset
     {
         std::auto_ptr<DefaultBillingRuleBlock> firstRuleBlock;
     public:
-        int calculateCallCost(DefaultBillingRuleBlockCallInfo &callInfo);
+        int chargeForCall(Call call, Subscriber &subscriber);
         DefaultBillingRulesRuleset();
     };
 }
