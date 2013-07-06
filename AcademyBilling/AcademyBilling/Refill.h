@@ -11,12 +11,14 @@ namespace AcademyBilling
 		int money;
 		time_t time;
 	public:	
-		Refill(int,time_t);
+		Refill(const int&, const time_t&);
+		Refill(const Refill&);
 		~Refill(void);
 		int getMoney() const;
 		void setMoney(const int&);
 		time_t getTime() const;
 		void setTime(const time_t&);
+		Refill& operator=(const Refill&);
 	};
 }
 
