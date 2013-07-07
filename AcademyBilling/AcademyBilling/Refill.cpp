@@ -3,52 +3,46 @@
 
 namespace AcademyBilling
 {
-	Refill::Refill(const int& _money,const time_t& _time)
-	{
-		money=_money;
-		setTime(_time);
-	}
+    Refill::Refill(const int& aMoney,const time_t& aTime)
+    {
+        money=aMoney;
+        setTime(aTime);
+    }
 
-	Refill::Refill(const Refill& _refill)
-	{
-		money=_refill.getMoney();
-		time=getTime();
-	}
+    Refill::Refill(const Refill& aRefill)
+    {
+        money=aRefill.getMoney();
+        time=getTime();
+    }
 
-	Refill::~Refill(void)
-	{
-	}
+    Refill::~Refill(void)
+    {
+    }
 
-	int Refill::getMoney() const
-	{
-		return money;
-	}
+    int Refill::getMoney() const
+    {
+        return money;
+    }
 
-	void Refill::setMoney(const int& _money)
-	{
-		money=_money;
-	}
+    void Refill::setMoney(const int& aMoney)
+    {
+        money=aMoney;
+    }
 
-	time_t Refill::getTime() const
-	{
-		return time;
-	}
+    time_t Refill::getTime() const
+    {
+        return time;
+    }
 
-	void Refill::setTime(const time_t& _time)
-	{
-		// Constant magictime is 01.01.2000.
-		const time_t magictime=946677600;
-		if (_time<magictime || _time>::time(0))
-		{
-			throw std::invalid_argument("Time is bad.");
-		}
-		time=_time;
-	}
+    void Refill::setTime(const time_t& aTime)
+    {
+        time=aTime;
+    }
 
-	Refill& Refill::operator=(const Refill& _refill)
-	{
-		money=_refill.getMoney();
-		time=_refill.getTime();
-		return *this;
-	}
+    Refill& Refill::operator=(const Refill& aRefill)
+    {
+        money=aRefill.getMoney();
+        time=aRefill.getTime();
+        return *this;
+    }
 }

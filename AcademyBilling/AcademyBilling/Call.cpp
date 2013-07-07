@@ -4,72 +4,72 @@
 
 namespace AcademyBilling
 {
-	Call::Call(const std::string& _caller,const std::string& _callee,const time_t& _time,const unsigned int& _duration)
-	{
-		setCallerNumber(_caller);
-		setCalleeNumber(_callee);
-		setTime(_time);
-		duration=_duration;
-	}
+    bool isNumberValid(const std::string&);
 
-	Call::~Call(void)
-	{
-	}
+    Call::Call(const std::string& aCaller,const std::string& aCallee,const time_t& aTime,const unsigned int& aDuration)
+    {
+        setCallerNumber(aCaller);
+        setCalleeNumber(aCallee);
+        setTime(aTime);
+        duration=aDuration;
+    }
 
-	std::string Call::getCallerNumber() const
-	{
-		return callerNumber;
-	}
+    Call::~Call(void)
+    {
+    }
 
-	std::string Call::getCalleeNumber() const
-	{
-		return calleeNumber;
-	}
+    std::string Call::getCallerNumber() const
+    {
+        return callerNumber;
+    }
 
-	void Call::setCalleeNumber(const std::string& str)
-	{
-		if (Subscriber::isNumberValid(str)) 
-		{
-			calleeNumber=str;
-		}
-		else
-		{
-			throw std::invalid_argument("Callee number is bad");
-		}
-	}
+    std::string Call::getCalleeNumber() const
+    {
+        return calleeNumber;
+    }
 
-	void Call::setCallerNumber(const std::string& str)
-	{
-		if (Subscriber::isNumberValid(str)) 
-		{
-			callerNumber=str;
-		}
-		else
-		{
-			throw std::invalid_argument("Caller number is bad");
-		}
-	}
+    void Call::setCalleeNumber(const std::string& str)
+    {
+        if (isNumberValid(str)) 
+        {
+            calleeNumber=str;
+        }
+        else
+        {
+            throw std::invalid_argument("Callee number is bad");
+        }
+    }
 
-	time_t Call::getTime() const
-	{
-		return time;
-	}
+    void Call::setCallerNumber(const std::string& str)
+    {
+        if (isNumberValid(str)) 
+        {
+            callerNumber=str;
+        }
+        else
+        {
+            throw std::invalid_argument("Caller number is bad");
+        }
+    }
 
-	void Call::setTime(const time_t& _time)
-	{
-		// Constant magictime initialization in Refill::setTime();
-		extern const time_t magictime;
-		if (_time<magictime || _time>::time(0))
-		{
-			throw std::invalid_argument("Time is bad.");
-		}
-		time=_time;
-	}
+    time_t Call::getTime() const
+    {
+        return time;
+    }
 
-	unsigned int Call::getDuration() const
-	{
-		return duration;
-	}
+    void Call::setTime(const time_t& aTime)
+    {
+        time=aTime;
+    }
 
-	
+    unsigned int Call::getDuration() const
+    {
+        return duration;
+    }
+
+    void Call::setDuration(const unsigned int& aDuration)
+    {
+        duration=aDuration;
+    }
+   
 }

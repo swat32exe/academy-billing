@@ -5,10 +5,11 @@
 #include <vector>
 #include "Refill.h"
 #include "Call.h"
-#include "BillingRules.h"
 
 namespace AcademyBilling
 {
+    class BillingRules;
+
     class Subscriber
     {
     private: 
@@ -16,7 +17,6 @@ namespace AcademyBilling
         std::string number;
         BillingRules *tariff;
         Refill lastRefill;
-        const static std::string mask;
     public:
         Subscriber(const std::string&, const int&, BillingRules*, const Refill);
         Subscriber(const Subscriber&);
@@ -29,7 +29,7 @@ namespace AcademyBilling
         void setNumber(const std::string&);
         int charge(const int&);
         int addRefill(const Refill&);
-        static bool isNumberValid(const std::string&);
+        const static std::string mask;
     };
 }
 

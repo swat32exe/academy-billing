@@ -4,14 +4,16 @@
 
 namespace AcademyBilling
 {
-    const std::string Subscriber::mask="+3(***)*******";
+    bool isNumberValid(const std::string&);
 
-    Subscriber::Subscriber(const std::string& _number, const int& _balance, BillingRules* _tariff, const Refill _lastRefill)
-        :lastRefill(_lastRefill)
+    const std::string Subscriber::mask="+**(***)*******";
+
+    Subscriber::Subscriber(const std::string& aNumber, const int& aBalance, BillingRules* aTariff, const Refill aLastRefill)
+        :lastRefill(aLastRefill)
     {
-        setNumber(_number);
-        balance=_balance;
-        tariff=_tariff;
+        setNumber(aNumber);
+        balance=aBalance;
+        tariff=aTariff;
     }
 
     Subscriber::~Subscriber(void)
@@ -28,20 +30,20 @@ namespace AcademyBilling
         return number;
     }
 
-	BillingRules* Subscriber::getTariff() const
-	{
-		return tariff;
-	}
+    BillingRules* Subscriber::getTariff() const
+    {
+        return tariff;
+    }
 
-	Refill Subscriber::getLastRefill() const
-	{
-		return lastRefill;
-	}
+    Refill Subscriber::getLastRefill() const
+    {
+        return lastRefill;
+    }
 
-	time_t Subscriber::getLastRefillTime() const
-	{
-		return lastRefill.getTime();
-	}
+    time_t Subscriber::getLastRefillTime() const
+    {
+        return lastRefill.getTime();
+    }
 
     void Subscriber::setNumber(const std::string& str)
     {
@@ -66,15 +68,15 @@ namespace AcademyBilling
         return balance+=refill.getMoney();
     }
 
-    bool Subscriber::isNumberValid(const std::string& str)
+    bool isNumberValid(const std::string& str)
     {
-        if (str.length()!=mask.length())
+        if (str.length()!=Subscriber::mask.length())
         {
             return false;
         }
-        for (size_t i=0;i<mask.length();++i)
+        for (size_t i=0;i<Subscriber::mask.length();++i)
         {
-            if (!(mask[i]=='*' && isdigit(str[i]) || mask[i]!='*' && mask[i]==str[i]))
+            if (!(Subscriber::mask[i]=='*' && isdigit(str[i]) || Subscriber::mask[i]!='*' && Subscriber::mask[i]==str[i]))
             {
                 return false;
             }
