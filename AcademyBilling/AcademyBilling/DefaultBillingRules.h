@@ -11,6 +11,7 @@ namespace AcademyBilling
     class DefaultBillingRules :
         public BillingRules
     {
+        static const int freeMinutesSinceCreditAmount = 30;
         friend DefaultBillingRuleBlockFreeMinutesAfterCredit;
         int freeMinutesSinceLastCredit;
         time_t lastCreditTime;

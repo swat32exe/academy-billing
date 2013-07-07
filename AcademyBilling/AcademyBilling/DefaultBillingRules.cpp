@@ -6,7 +6,8 @@
 namespace AcademyBilling
 {
     DefaultBillingRules::DefaultBillingRules(void)
-        :freeMinutesSinceLastCredit(30)
+        :freeMinutesSinceLastCredit(freeMinutesSinceCreditAmount)
+        ,lastCreditTime(0)
     {
     }
 
@@ -14,8 +15,14 @@ namespace AcademyBilling
     {
     }
 
+    DefaultBillingRulesRuleset DefaultBillingRules::defaultBillingRulesRuleset;
+
     int DefaultBillingRules::chargeForCall(const Call &call, Subscriber &subscriber)
     {
+        if (lastCreditTime != subscriber.getLastRefillTime()) {
+            lastCreditTime = subscriber.getLastRefillTime();
+            freeMinutesSinceLastCredit = freeMinutesSinceCreditAmount;
+        }
         return defaultBillingRulesRuleset.chargeForCall(call, subscriber);
     }
 
