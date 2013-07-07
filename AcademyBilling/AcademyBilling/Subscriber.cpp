@@ -1,6 +1,7 @@
 #include "Subscriber.h"
 #include <stdexcept>
 #include <ctype.h>
+#include <regex>
 
 namespace AcademyBilling
 {
@@ -9,11 +10,9 @@ namespace AcademyBilling
     const std::string Subscriber::mask = "+**(***)*******";
 
     Subscriber::Subscriber(const std::string& aNumber, const int& aBalance, BillingRules* aTariff, const Refill aLastRefill)
-        :lastRefill(aLastRefill)
+        :balance(aBalance),tariff(aTariff),lastRefill(aLastRefill)
     {
         setNumber(aNumber);
-        balance = aBalance;
-        tariff = aTariff;
     }
 
     Subscriber::~Subscriber(void)
@@ -70,17 +69,8 @@ namespace AcademyBilling
 
     bool isNumberValid(const std::string& str)
     {
-        if (str.length() != Subscriber::mask.length())
-        {
-            return false;
-        }
-        for (size_t i = 0; i < Subscriber::mask.length(); ++i)
-        {
-            if (!(Subscriber::mask[i]=='*' && isdigit(str[i]) || Subscriber::mask[i]!='*' && Subscriber::mask[i]==str[i]))
-            {
-                return false;
-            }
-        }
-        return true;
+		// Regular expression for +**(***)******* when '*' is digit;
+		std::regex mask("\\+\\d{2}\\(\\d{3}\\)\\d{7}");
+		return std::regex_match(str,mask);
     }
 }

@@ -7,11 +7,10 @@ namespace AcademyBilling
     bool isNumberValid(const std::string&);
 
     Call::Call(const std::string& aCaller,const std::string& aCallee,const time_t& aTime,const unsigned int& aDuration)
+		:time(aTime),duration(aDuration)
     {
         setCallerNumber(aCaller);
         setCalleeNumber(aCallee);
-        setTime(aTime);
-        setDuration(aDuration);
     }
 
     Call::~Call(void)
