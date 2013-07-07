@@ -5,14 +5,14 @@ namespace AcademyBilling
 {
     Refill::Refill(const int& aMoney,const time_t& aTime)
     {
-        money=aMoney;
+        money = aMoney;
         setTime(aTime);
     }
 
     Refill::Refill(const Refill& aRefill)
     {
-        money=aRefill.getMoney();
-        time=getTime();
+        money = aRefill.getMoney();
+        time = getTime();
     }
 
     Refill::~Refill(void)
@@ -26,7 +26,7 @@ namespace AcademyBilling
 
     void Refill::setMoney(const int& aMoney)
     {
-        money=aMoney;
+        money = aMoney;
     }
 
     time_t Refill::getTime() const
@@ -36,13 +36,13 @@ namespace AcademyBilling
 
     void Refill::setTime(const time_t& aTime)
     {
-        time=aTime;
+        time = aTime;
     }
 
     Refill& Refill::operator=(const Refill& aRefill)
     {
-        money=aRefill.getMoney();
-        time=aRefill.getTime();
+        money = aRefill.getMoney();
+        time = aRefill.getTime();
         return *this;
     }
 }

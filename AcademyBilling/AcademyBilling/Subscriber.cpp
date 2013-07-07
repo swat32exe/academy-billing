@@ -6,14 +6,14 @@ namespace AcademyBilling
 {
     bool isNumberValid(const std::string&);
 
-    const std::string Subscriber::mask="+**(***)*******";
+    const std::string Subscriber::mask = "+**(***)*******";
 
     Subscriber::Subscriber(const std::string& aNumber, const int& aBalance, BillingRules* aTariff, const Refill aLastRefill)
         :lastRefill(aLastRefill)
     {
         setNumber(aNumber);
-        balance=aBalance;
-        tariff=aTariff;
+        balance = aBalance;
+        tariff = aTariff;
     }
 
     Subscriber::~Subscriber(void)
@@ -49,7 +49,7 @@ namespace AcademyBilling
     {
         if(isNumberValid(str))
         {
-            number=str;
+            number = str;
         }
         else
         {
@@ -59,22 +59,22 @@ namespace AcademyBilling
 
     int Subscriber::charge(const int& sum)
     {
-        return balance-=sum;
+        return balance -= sum;
     }
 
     int Subscriber::addRefill(const Refill& refill)
     {
-        lastRefill=refill;
-        return balance+=refill.getMoney();
+        lastRefill = refill;
+        return balance += refill.getMoney();
     }
 
     bool isNumberValid(const std::string& str)
     {
-        if (str.length()!=Subscriber::mask.length())
+        if (str.length() != Subscriber::mask.length())
         {
             return false;
         }
-        for (size_t i=0;i<Subscriber::mask.length();++i)
+        for (size_t i = 0; i < Subscriber::mask.length(); ++i)
         {
             if (!(Subscriber::mask[i]=='*' && isdigit(str[i]) || Subscriber::mask[i]!='*' && Subscriber::mask[i]==str[i]))
             {

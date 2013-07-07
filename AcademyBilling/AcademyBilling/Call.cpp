@@ -11,7 +11,7 @@ namespace AcademyBilling
         setCallerNumber(aCaller);
         setCalleeNumber(aCallee);
         setTime(aTime);
-        duration=aDuration;
+        setDuration(aDuration);
     }
 
     Call::~Call(void)
@@ -32,7 +32,7 @@ namespace AcademyBilling
     {
         if (isNumberValid(str)) 
         {
-            calleeNumber=str;
+            calleeNumber = str;
         }
         else
         {
@@ -44,7 +44,7 @@ namespace AcademyBilling
     {
         if (isNumberValid(str)) 
         {
-            callerNumber=str;
+            callerNumber = str;
         }
         else
         {
@@ -59,7 +59,7 @@ namespace AcademyBilling
 
     void Call::setTime(const time_t& aTime)
     {
-        time=aTime;
+        time = aTime;
     }
 
     unsigned int Call::getDuration() const
@@ -69,7 +69,7 @@ namespace AcademyBilling
 
     void Call::setDuration(const unsigned int& aDuration)
     {
-        duration=aDuration;
+        duration = aDuration;
     }
    
 }
