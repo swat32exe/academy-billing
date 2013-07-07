@@ -26,7 +26,7 @@ namespace AcademyBilling
             throw std::logic_error("Call from unknown subscriber.");
         BillingRules * billingRules = subscriber->getTariff();
         assert(billingRules != NULL && "Tarif not defined for subscriber");
-        billingRules->chargeForCall(*subscriber, call);
+        billingRules->chargeForCall(call, *subscriber);
     }
 
     void BillingCalculator::chargeForMultipleCalls(const std::vector<Call>& calls)

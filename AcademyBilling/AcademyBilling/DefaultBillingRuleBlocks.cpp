@@ -74,7 +74,7 @@ namespace AcademyBilling
         DefaultBillingRules *tariff = static_cast<DefaultBillingRules *>(subscriber.getTariff());
 
         bool isInside = isInsideNetwork(call.getCalleeNumber());
-        bool minutesNotExpired = (call.getTime() - tariff->lastCreditTime) >= minutesValidTime;
+        bool minutesNotExpired = (call.getTime() - tariff->lastCreditTime) <= minutesValidTime;
         if (isInside && minutesNotExpired) {
             int& freeMinutesSinceLastCredit = tariff->freeMinutesSinceLastCredit;
             int secondsCovered = freeMinutesSinceLastCredit * Utility::secondsInMinute;
