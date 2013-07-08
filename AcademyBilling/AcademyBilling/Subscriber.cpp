@@ -10,10 +10,8 @@ namespace AcademyBilling
         :balance(balance), tariff(tariff), lastRefill(lastRefill)
     {
         setNumber(number);
-		if (this->balance < 0) 
-		{
-			throw BalanceIsEmpty();
-		}
+        if (this->balance < 0) 
+            throw BalanceIsEmpty();
     }
 
     Subscriber::~Subscriber(void)
@@ -47,17 +45,17 @@ namespace AcademyBilling
 
     void Subscriber::setNumber(const std::string& number)
     {
-        if(isNumberValid(number))
+        if (isNumberValid(number))
             this->number = number;
-		else
+        else
             throw std::invalid_argument("Invalid number");            
     }
 
     int Subscriber::charge(const int& sum)
     {
-		balance -= sum;
-		if (balance < 0) 
-			throw BalanceIsEmpty();
+        balance -= sum;
+        if (balance < 0) 
+            throw BalanceIsEmpty();
         return balance;
     }
 
@@ -69,8 +67,8 @@ namespace AcademyBilling
 
     bool isNumberValid(const std::string& str)
     {
-		// Regular expression for +**(***)******* when '*' is digit;
-		std::regex mask("\\+\\d{2}\\(\\d{3}\\)\\d{7}");
-		return std::regex_match(str, mask);
+        // Regular expression for +**(***)******* when '*' is digit;
+        std::regex mask("\\+\\d{2}\\(\\d{3}\\)\\d{7}");
+        return std::regex_match(str, mask);
     }
 }

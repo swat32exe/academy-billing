@@ -11,9 +11,9 @@ namespace AcademyBilling
 {
     class BillingRules;
 
-	class BalanceIsEmpty: public std::logic_error
-	{
-	};
+    class BalanceIsEmpty: public std::logic_error
+    {
+    };
 
     class Subscriber
     {
