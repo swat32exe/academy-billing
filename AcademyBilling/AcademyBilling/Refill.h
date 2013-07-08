@@ -18,7 +18,7 @@ namespace AcademyBilling
         void setMoney(const int&);
         time_t getTime() const;
         void setTime(const time_t&);
-        Refill& operator= (const Refill&);
+        Refill& operator = (const Refill&);
     };
 }
 

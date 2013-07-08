@@ -3,7 +3,7 @@
 
 namespace AcademyBilling
 {
-	class Subscriber;
+    class Subscriber;
 
     class BillingRules
     {
