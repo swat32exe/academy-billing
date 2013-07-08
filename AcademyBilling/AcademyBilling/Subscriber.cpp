@@ -1,5 +1,4 @@
 #include "Subscriber.h"
-#include <stdexcept>
 #include <ctype.h>
 #include <regex>
 
@@ -7,12 +6,14 @@ namespace AcademyBilling
 {
     bool isNumberValid(const std::string&);
 
-    const std::string Subscriber::mask = "+**(***)*******";
-
-    Subscriber::Subscriber(const std::string& aNumber, const int& aBalance, BillingRules* aTariff, const Refill aLastRefill)
-        :balance(aBalance),tariff(aTariff),lastRefill(aLastRefill)
+    Subscriber::Subscriber(const std::string &number, const int &balance, BillingRules* tariff, const Refill &lastRefill)
+        :balance(balance), tariff(tariff), lastRefill(lastRefill)
     {
-        setNumber(aNumber);
+        setNumber(number);
+		if (this->balance < 0) 
+		{
+			throw BalanceIsEmpty();
+		}
     }
 
     Subscriber::~Subscriber(void)
@@ -21,44 +22,43 @@ namespace AcademyBilling
 
     int Subscriber::getBalance() const
     {
-        return balance;
+        return this->balance;
     }
 
     std::string Subscriber::getNumber() const
     {
-        return number;
+        return this->number;
     }
 
     BillingRules* Subscriber::getTariff() const
     {
-        return tariff;
+        return this->tariff;
     }
 
     Refill Subscriber::getLastRefill() const
     {
-        return lastRefill;
+        return this->lastRefill;
     }
 
     time_t Subscriber::getLastRefillTime() const
     {
-        return lastRefill.getTime();
+        return this->lastRefill.getTime();
     }
 
-    void Subscriber::setNumber(const std::string& str)
+    void Subscriber::setNumber(const std::string& number)
     {
-        if(isNumberValid(str))
-        {
-            number = str;
-        }
-        else
-        {
+        if(isNumberValid(number))
+            this->number = number;
+		else
             throw std::invalid_argument("Invalid number");            
-        }
     }
 
     int Subscriber::charge(const int& sum)
     {
-        return balance -= sum;
+		balance -= sum;
+		if (balance < 0) 
+			throw BalanceIsEmpty();
+        return balance;
     }
 
     int Subscriber::addRefill(const Refill& refill)
@@ -71,6 +71,6 @@ namespace AcademyBilling
     {
 		// Regular expression for +**(***)******* when '*' is digit;
 		std::regex mask("\\+\\d{2}\\(\\d{3}\\)\\d{7}");
-		return std::regex_match(str,mask);
+		return std::regex_match(str, mask);
     }
 }

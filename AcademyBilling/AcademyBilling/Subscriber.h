@@ -3,12 +3,17 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept>
 #include "Refill.h"
 #include "Call.h"
 
 namespace AcademyBilling
 {
     class BillingRules;
+
+	class BalanceIsEmpty: public std::logic_error
+	{
+	};
 
     class Subscriber
     {
@@ -18,7 +23,7 @@ namespace AcademyBilling
         BillingRules *tariff;
         Refill lastRefill;
     public:
-        Subscriber(const std::string&, const int&, BillingRules*, const Refill);
+        Subscriber(const std::string&, const int&, BillingRules*, const Refill&);
         Subscriber(const Subscriber&);
         ~Subscriber();
         int getBalance() const;
@@ -29,7 +34,6 @@ namespace AcademyBilling
         void setNumber(const std::string&);
         int charge(const int&);
         int addRefill(const Refill&);
-        const static std::string mask;
     };
 }
 

@@ -6,11 +6,11 @@ namespace AcademyBilling
 {
     bool isNumberValid(const std::string&);
 
-    Call::Call(const std::string& aCaller,const std::string& aCallee,const time_t& aTime,const unsigned int& aDuration)
-		:time(aTime),duration(aDuration)
+    Call::Call(const std::string &callerNumber, const std::string &calleeNumber, const time_t &time, const unsigned int &duration)
+		:time(time), duration(duration)
     {
-        setCallerNumber(aCaller);
-        setCalleeNumber(aCallee);
+        setCallerNumber(callerNumber);
+        setCalleeNumber(calleeNumber);
     }
 
     Call::~Call(void)
@@ -19,56 +19,48 @@ namespace AcademyBilling
 
     std::string Call::getCallerNumber() const
     {
-        return callerNumber;
+        return this->callerNumber;
     }
 
     std::string Call::getCalleeNumber() const
     {
-        return calleeNumber;
+        return this->calleeNumber;
     }
 
-    void Call::setCalleeNumber(const std::string& str)
+    void Call::setCalleeNumber(const std::string &calleeNumber)
     {
-        if (isNumberValid(str)) 
-        {
-            calleeNumber = str;
-        }
+        if (isNumberValid(calleeNumber)) 
+            this->calleeNumber = calleeNumber;
         else
-        {
-            throw std::invalid_argument("Callee number is bad");
-        }
-    }
-
-    void Call::setCallerNumber(const std::string& str)
-    {
-        if (isNumberValid(str)) 
-        {
-            callerNumber = str;
-        }
-        else
-        {
             throw std::invalid_argument("Caller number is bad");
-        }
+    }
+
+    void Call::setCallerNumber(const std::string &callerNumber)
+    {
+        if (isNumberValid(callerNumber)) 
+            this->callerNumber = callerNumber;
+        else
+            throw std::invalid_argument("Caller number is bad");
     }
 
     time_t Call::getTime() const
     {
-        return time;
+        return this->time;
     }
 
-    void Call::setTime(const time_t& aTime)
+    void Call::setTime(const time_t &time)
     {
-        time = aTime;
+        this->time = time;
     }
 
     unsigned int Call::getDuration() const
     {
-        return duration;
+        return this->duration;
     }
 
-    void Call::setDuration(const unsigned int& aDuration)
+    void Call::setDuration(const unsigned int &duration)
     {
-        duration = aDuration;
+        this->duration = duration;
     }
    
 }
