@@ -1,5 +1,6 @@
 #include "Call.h"
 #include "Subscriber.h"
+
 #include <stdexcept>
 
 namespace AcademyBilling
@@ -7,7 +8,8 @@ namespace AcademyBilling
     bool isNumberValid(const std::string&);
 
     Call::Call(const std::string &callerNumber, const std::string &calleeNumber, const time_t &time, const unsigned int &duration)
-        :time(time), duration(duration)
+        :time(time)
+        ,duration(duration)
     {
         setCallerNumber(callerNumber);
         setCalleeNumber(calleeNumber);

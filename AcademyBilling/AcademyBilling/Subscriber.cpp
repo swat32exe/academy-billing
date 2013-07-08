@@ -1,4 +1,5 @@
 #include "Subscriber.h"
+
 #include <ctype.h>
 #include <regex>
 
@@ -7,7 +8,9 @@ namespace AcademyBilling
     bool isNumberValid(const std::string&);
 
     Subscriber::Subscriber(const std::string &number, const int &balance, BillingRules* tariff, const Refill &lastRefill)
-        :balance(balance), tariff(tariff), lastRefill(lastRefill)
+        :balance(balance)
+        ,tariff(tariff)
+        ,lastRefill(lastRefill)
     {
         setNumber(number);
         if (this->balance < 0) 
