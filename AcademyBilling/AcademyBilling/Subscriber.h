@@ -14,6 +14,11 @@ namespace AcademyBilling
 
     class BalanceIsEmpty: public std::logic_error
     {
+    public:
+        BalanceIsEmpty() :
+            std::logic_error("Subscriber's balance is empty")
+        {
+        }
     };
 
     class Subscriber
