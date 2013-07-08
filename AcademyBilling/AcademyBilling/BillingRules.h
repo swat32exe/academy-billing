@@ -1,6 +1,4 @@
 #pragma once
-#include "Subscriber.h"
-#include "Call.h"
 
 namespace AcademyBilling
 {
